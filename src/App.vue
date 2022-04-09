@@ -4,7 +4,7 @@
       <div class="todo-wrap">
         <TodoHeader :addTodo="addTodo"/>
         <TodoList :todos="todos" :checkTodo="checkTodo" :deleteTodo="deleteTodo"/>
-        <TodoFooter :todos="todos" :checkAllTodo="checkAllTodo" :clearAllTodo="clearAllTodo"/>
+        <TodoFooter :todos="todos" @checkAllTodo="checkAllTodo" @clearAllTodo="clearAllTodo"/>
       </div>
     </div>
   </div>
@@ -21,7 +21,7 @@
       components:{TodoHeader, TodoFooter, TodoList},
       data() {
         return {
-          // 从浏览器的本地存储中读取数据
+          // 从本地存储中获得数据，null就创建空数组[]
             todos:JSON.parse(localStorage.getItem('todos')) || []
         }
       },

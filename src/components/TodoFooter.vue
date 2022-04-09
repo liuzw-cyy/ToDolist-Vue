@@ -13,7 +13,7 @@
 <script>
     export default {
         name:'TodoFooter',
-        props:['todos', 'checkAllTodo', 'clearAllTodo'],
+        props:['todos'],
         computed:{
             total(){
                 return this.todos.length
@@ -35,13 +35,13 @@
                 },
                 //isAll被修改时set被调用
                 set(value){
-                    this.checkAllTodo(value)
+                    this.$emit('checkAllTodo', value)
                 }
             }
         },
         methods: {
                 clearAll(){
-                    this.clearAllTodo()
+                    this.$emit('clearAllTodo')
                 }
         }
     }
