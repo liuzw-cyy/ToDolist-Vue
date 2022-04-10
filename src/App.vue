@@ -21,7 +21,7 @@
       components:{TodoHeader, TodoFooter, TodoList},
       data() {
         return {
-          // 从本地存储中获得数据，null就创建空数组[]
+          // 从本地存储中获得数据，如果为null就创建空数组[]
             todos:JSON.parse(localStorage.getItem('todos')) || []
         }
       },
