@@ -3,7 +3,7 @@
     <div class="todo-container">
       <div class="todo-wrap">
         <TodoHeader :addTodo="addTodo"/>
-        <TodoList :todos="todos" :checkTodo="checkTodo" :deleteTodo="deleteTodo"/>
+        <TodoList :todos="todos"/>
         <TodoFooter :todos="todos" @checkAllTodo="checkAllTodo" @clearAllTodo="clearAllTodo"/>
       </div>
     </div>
@@ -54,6 +54,14 @@
           this.todos = this.todos.filter((todo) => {
             return !todo.done
           })
+        },
+        //更新一个todo
+        updateTodo(id, title) {
+          this.todos.forEach((todo) => {
+            if(todo.id === id) {
+              todo.title = title
+            }
+          })
         }
       },
       // 将输入事件放到浏览器本地存储中
@@ -65,6 +73,17 @@
             localStorage.setItem('todos', JSON.stringify(value))
           }
         }
+      },
+      // 全局事件总线
+      mounted() {
+        this.$bus.$on('checkTodo', this.checkTodo)
+        this.$bus.$on('deleteTodo', this.deleteTodo)
+        this.$bus.$on('updateTodo',this.updateTodo)
+      },
+      beforeDestroy() {
+        this.$bus.$off('checkTodo')
+        this.$bus.$off('deleteTodo')
+        this.$bus.$off('updateTodo')
       }
     }
 </script>
@@ -92,6 +111,11 @@
       color: #fff;
       background-color: #da4f49;
       border: 1px solid #bd362f;
+    }
+
+    .btn-edit {
+      background-color: bisque;
+      margin-right: 5px;
     }
 
     .btn-danger:hover {

@@ -40,9 +40,9 @@
             }
         },
         methods: {
-                clearAll(){
-                    this.$emit('clearAllTodo')
-                }
+            clearAll(){
+                this.$emit('clearAllTodo')
+            }
         }
     }
 </script>
